@@ -1,4 +1,4 @@
-package Threads_Synchronization_CProblems;
+package Threads_Synchronization;
 
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Lock;
