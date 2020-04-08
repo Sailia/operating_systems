@@ -58,9 +58,10 @@ public class Question1_WithdrawDeposit {
     			if(balance < 2000) {
     				sem.acquire();
     				balance += amount;
+    				displayStatus();
+    	    		sem.release();
     			}
-    			displayStatus();
-	    		sem.release();
+    			
 	    		
 	    		
 	    		
@@ -94,9 +95,10 @@ public class Question1_WithdrawDeposit {
     			if(balance >= amount) {
     				sem.acquire();
     				balance -= amount;
+    				displayStatus();
+        			sem.release();
     			}
-    			displayStatus();
-    			sem.release();
+    			
 	    		
 	    		//--------------------------------------------end of Withdraw function
 				

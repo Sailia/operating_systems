@@ -57,7 +57,7 @@ public class Main {
 		void eat() {
 			try {
 				int sleepTime = ThreadLocalRandom.current().nextInt(0, 1000);
-				System.out.println("Philosopher" + (number +1) + " eats for " + sleepTime);
+				System.out.println("Philosopher" + (number + 1) + " eats for " + sleepTime);
 				Thread.sleep(sleepTime);
 			} catch (Exception e) {
 				e.printStackTrace(System.out);

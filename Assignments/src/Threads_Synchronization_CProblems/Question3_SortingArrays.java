@@ -31,14 +31,11 @@ public class Question3_SortingArrays {
 	
 
 	static Semaphore sem = new Semaphore(1);
-	public static int count = 0;
-	public static int temp = buffer[count];
-	
-
+	public static int swapped = 0;
+	public static int current = buffer[0];
+	public static int temp = 0;
+	public static int size = BufferSize;
 	//--------------------------------------------end of shared resources section
-	
-	
-	
 	// this function simply displays the content of the shared buffer and which thread made the call
 	// DONOT CHANGE THIS FUNCTION
 	public static void displayStatus() {
@@ -61,25 +58,25 @@ public class Question3_SortingArrays {
 	    try {
 	    		
 	    		System.out.println("The Ascending is trying to sort the shared buffer");
-					
 				    
 	    		// Sort the buffer in ascending order
 	    		// Call displayStatus after you sort and before release the lock
 	    		// Implement the Ascending functionality in the area below
-    
-	    		sem.acquire();
-	    		Arrays.sort(buffer, 0, buffer.length);
-	    		displayStatus();
-	    		sem.release();
-	    		
-	    		
-	    		
-	    		
-				
-				
-	    		
-	    		
-
+			    do {	
+	    			for(int i = 0; i < buffer.length - 1; i++) {	
+			    		current = buffer[i];
+			    		swapped = 0;
+			    		if(current > buffer[i + 1]) {
+		    				sem.acquire();
+							temp = buffer[i + 1];
+							buffer[i + 1] = current;
+							buffer[i] = temp;
+							displayStatus();
+							swapped++;
+				    		sem.release();
+						}
+			    	}
+			    } while(swapped > 0);
 	    		//--------------------------------------------end of Ascending function
 	    		
 	   	} catch (Exception e) {
@@ -98,10 +95,21 @@ public class Question3_SortingArrays {
     		// Sort the buffer in descending order
     		// Call displayStatus after you sort and before release the lock
     		// Implement the Descending functionality in the area below
-	    	sem.acquire();
-	    	Collections.reverse(Arrays.asList(buffer));
-			displayStatus();
-			sem.release();
+		    do {	
+    			for(int i = 0; i < buffer.length - 1; i++) {	
+		    		current = buffer[i];
+		    		swapped = 0;
+		    		if(current < buffer[i + 1]) {
+	    				sem.acquire();
+						temp = buffer[i + 1];
+						buffer[i + 1] = current;
+						buffer[i] = temp;
+						displayStatus();
+						swapped++;
+			    		sem.release();
+					}
+		    	}
+		    } while(swapped > 0);
 	    		
 	    		
 					
