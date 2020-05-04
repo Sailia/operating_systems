@@ -58,7 +58,7 @@ public class Question3_SortingArrays {
 	    try {
 	    		
 	    		System.out.println("The Ascending is trying to sort the shared buffer");
-				    
+	    		sem.acquire();    
 	    		// Sort the buffer in ascending order
 	    		// Call displayStatus after you sort and before release the lock
 	    		// Implement the Ascending functionality in the area below
@@ -67,18 +67,16 @@ public class Question3_SortingArrays {
 			    		current = buffer[i];
 			    		swapped = 0;
 			    		if(current > buffer[i + 1]) {
-		    				sem.acquire();
 							temp = buffer[i + 1];
 							buffer[i + 1] = current;
 							buffer[i] = temp;
 							displayStatus();
 							swapped++;
-				    		sem.release();
 						}
 			    	}
 			    } while(swapped > 0);
 	    		//--------------------------------------------end of Ascending function
-	    		
+			    sem.release();
 	   	} catch (Exception e) {
 	   		System.out.println("Problem with the Ascending function "+e.toString());
 	   	}
@@ -86,41 +84,39 @@ public class Question3_SortingArrays {
 		
 	
 	
-	public static void Descending(){
-	    try {
-    			
-	    	System.out.println("The Descending is trying to sort the shared buffer");
-			
-		    
-    		// Sort the buffer in descending order
-    		// Call displayStatus after you sort and before release the lock
-    		// Implement the Descending functionality in the area below
-		    do {	
-    			for(int i = 0; i < buffer.length - 1; i++) {	
-		    		current = buffer[i];
-		    		swapped = 0;
-		    		if(current < buffer[i + 1]) {
-	    				sem.acquire();
-						temp = buffer[i + 1];
-						buffer[i + 1] = current;
-						buffer[i] = temp;
-						displayStatus();
-						swapped++;
-			    		sem.release();
-					}
-		    	}
-		    } while(swapped > 0);
-	    		
-	    		
-					
-
-	    	//--------------------------------------------end of Descending function
-
-	   	} catch (Exception e) {
-	   		System.out.println("Problem with the Descending function "+e.toString());
-	   	}
-	}	
-	
+//	public static void Descending(){
+//	    try {
+//    			
+//	    	System.out.println("The Descending is trying to sort the shared buffer");
+//	    	sem.acquire();
+//		    
+//    		// Sort the buffer in descending order
+//    		// Call displayStatus after you sort and before release the lock
+//    		// Implement the Descending functionality in the area below
+//		    do {	
+//    			for(int i = 0; i < buffer.length - 1; i++) {	
+//		    		current = buffer[i];
+//		    		swapped = 0;
+//		    		if(current < buffer[i + 1]) {
+//						temp = buffer[i + 1];
+//						buffer[i + 1] = current;
+//						buffer[i] = temp;
+//						displayStatus();
+//						swapped++;
+//					}
+//		    	}
+//		    } while(swapped > 0);
+//    		sem.release();	
+//	    		
+//					
+//
+//	    	//--------------------------------------------end of Descending function
+//
+//	   	} catch (Exception e) {
+//	   		System.out.println("Problem with the Descending function "+e.toString());
+//	   	}
+//	}	
+//	
 
 	
 	
